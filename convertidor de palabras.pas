@@ -54,7 +54,7 @@ var
   i, valor: Integer;
   binario: String;
 begin
-  valor := Ord(caracter); // Obtener el valor ASCII del carácter
+  valor := Ord(caracter);
   binario := '';
   for i := 7 downto 0 do
   begin
@@ -116,7 +116,6 @@ begin
       'D': resultadoRomano := resultadoRomano + 'D';
       'M': resultadoRomano := resultadoRomano + 'M';
       else
-        // Carácter no válido, se ignora
     end;
   end;
   PalabraARomano := resultadoRomano;
