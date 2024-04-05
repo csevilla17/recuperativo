@@ -12,6 +12,7 @@ type
     Fecha: string;
     Status: boolean;
   end;
+
 procedure GuardarReporteEnArchivo(reporte: Reporte);
 var
   archivo: text;
