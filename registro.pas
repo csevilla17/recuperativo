@@ -43,3 +43,21 @@ begin
     writeln('El reporte con id ', reporte.id, ' ha sido guardado exitosamente.');
   end;
 end;
+
+var
+  miReporte: Reporte;
+
+begin
+  // Ejemplo de uso
+  miReporte.id := 1;
+  miReporte.titulo := 'Ejemplo de reporte';
+  miReporte.categoria := 'Categoria1';
+  miReporte.contenido := 'Contenido del reporte';
+  miReporte.Fecha := '05/04/2024';
+  miReporte.Status := true;
+
+  GuardarReporteEnArchivo(miReporte);
+
+  // Mantener el programa abierto
+  readln;
+end.
