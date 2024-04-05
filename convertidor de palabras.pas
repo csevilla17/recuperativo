@@ -3,16 +3,17 @@ program ConvertirPalabra;
 uses
   SysUtils;
 
+// Función para convertir un carácter en su representación binaria de 8 bits
 function CaracterABinario(caracter: Char): String;
 var
   i, valor: Integer;
   binario: String;
 begin
-  valor := Ord(caracter); // Obtener el valor carácter
+  valor := Ord(caracter);
   binario := '';
   for i := 7 downto 0 do
   begin
-    binario := binario + Chr((valor shr i) and 1 + Ord('0')); 
+    binario := binario + Chr((valor shr i) and 1 + Ord('0')); // Convertir el bit a un carácter '0' o '1'
   end;
   CaracterABinario := binario;
 end;
@@ -25,7 +26,7 @@ var
 begin
   binario := '';
   for i := 1 to Length(palabra) do
-    binario := binario + CaracterABinario(palabra[i]) + ' '; // Convertir cada carácter a su valor binario
+    binario := binario + CaracterABinario(palabra[i]) + ' '; 
   PalabraABinario := binario;
 end;
 
@@ -41,10 +42,22 @@ begin
   PalabraAHexadecimal := resultadoHex;
 end;
 
+// Función para convertir una palabra en un número octal
+function PalabraAOctal(palabra: String): String;
+var
+  i: Integer;
+  resultadoOctal: String;
+begin
+  resultadoOctal := '';
+  for i := 1 to Length(palabra) do
+    resultadoOctal := resultadoOctal + IntToStr(Ord(palabra[i]) mod 8); // Convertir cada carácter a su valor octal
+  PalabraAOctal := resultadoOctal;
+end;
+
 var
   opcionMenu, opcionConversion: Integer;
   palabra: String;
-  resultadoBinario, resultadoHexadecimal: String;
+  resultadoBinario, resultadoHexadecimal, resultadoOctal: String;
 
 begin
   repeat
@@ -69,21 +82,18 @@ begin
            
            case opcionConversion of
              1: begin
-                  // Convertir la palabra a binario
                   resultadoBinario := PalabraABinario(palabra);
                   writeln('Palabra convertida a binario: ', resultadoBinario);
                 end;
              2: begin
-                  // Convertir la palabra a hexadecimal
                   resultadoHexadecimal := PalabraAHexadecimal(palabra);
                   writeln('Palabra convertida a hexadecimal: ', resultadoHexadecimal);
                 end;
              3: begin
-                  // Lógica para convertir a octal
-                  writeln('Palabra convertida a octal: ', palabra);
+                  resultadoOctal := PalabraAOctal(palabra);
+                  writeln('Palabra convertida a octal: ', resultadoOctal);
                 end;
              4: begin
-                  // Lógica para convertir a romano
                   writeln('Palabra convertida a romano: ', palabra);
                 end;
            else
