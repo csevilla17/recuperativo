@@ -4,83 +4,55 @@ uses
   SysUtils;
 
 var
-  opcion: integer;
-  palabra: string;
-
-function DecimalToBinary(decimal: integer): string;
-begin
-  if decimal > 0 then
-    Result := DecimalToBinary(decimal div 2) + IntToStr(decimal mod 2)
-  else
-    Result := '';
-end;
-
-procedure ConvertirPalabra;
-var
-  i: integer;
-  decimal: integer;
-begin
-  Write('Ingresa una palabra: ');
-  ReadLn(palabra);
-  
-  WriteLn('Opciones de conversión:');
-  WriteLn('1. Binario');
-  WriteLn('2. Hexadecimal');
-  WriteLn('3. Octal');
-  WriteLn('4. Romano');
-  Write('Elige una opción: ');
-  ReadLn(opcion);
-  
-  case opcion of
-    1: begin
-         // Convertir a binario
-         for i := 1 to Length(palabra) do begin
-           decimal := Ord(palabra[i]);
-           Write(DecimalToBinary(decimal), ' ');
-         end;
-         WriteLn;
-       end;
-    2: begin
-         // Convertir a hexadecimal
-         for i := 1 to Length(palabra) do begin
-           decimal := Ord(palabra[i]);
-           Write(IntToHex(decimal, 2), ' ');
-         end;
-         WriteLn;
-       end;
-    3: begin
-         // Convertir a octal
-         for i := 1 to Length(palabra) do begin
-           decimal := Ord(palabra[i]);
-           Write(OctStr(decimal), ' ');
-         end;
-         WriteLn;
-       end;
-    4: begin
-         // Convertir a romano
-         // Aquí se podría agregar una función para convertir a números romanos si es necesario
-         WriteLn('Funcionalidad para convertir a números romanos aún no implementada.');
-       end;
-  else
-    WriteLn('Opción no válida. Por favor, elige una opción del 1 al 4.');
-  end;
-end;
+  opcionMenu, opcionConversion: Integer;
+  palabra: String;
 
 begin
   repeat
-    // Mostrar opciones al usuario
-    WriteLn('1. Convertir palabra');
-    WriteLn('2. Salir');
-    Write('Elige una opción: ');
-    ReadLn(opcion);
+    writeln('Menu:');
+    writeln('1. Convertir palabra.');
+    writeln('2. Salir.');
+    write('Ingrese su opcion: ');
+    readln(opcionMenu);
     
-    case opcion of
-      1: ConvertirPalabra;
-      2: WriteLn('Saliendo del programa...');
+    case opcionMenu of
+      1: begin
+           writeln('Opciones de conversion:');
+           writeln('1. Binario.');
+           writeln('2. Hexadecimal.');
+           writeln('3. Octal.');
+           writeln('4. Romano.');
+           write('Ingrese su opcion de conversion: ');
+           readln(opcionConversion);
+           
+           writeln('Ingrese la palabra a convertir: ');
+           readln(palabra);
+           
+           case opcionConversion of
+             1: begin
+                  // Lógica para convertir a binario
+                  writeln('Palabra convertida a binario: ', palabra);
+                end;
+             2: begin
+                  // Lógica para convertir a hexadecimal
+                  writeln('Palabra convertida a hexadecimal: ', palabra);
+                end;
+             3: begin
+                  // Lógica para convertir a octal
+                  writeln('Palabra convertida a octal: ', palabra);
+                end;
+             4: begin
+                  // Lógica para convertir a romano
+                  writeln('Palabra convertida a romano: ', palabra);
+                end;
+           else
+             writeln('Opcion de conversion invalida.');
+           end;
+         end;
+      2: writeln('Saliendo del programa.');
     else
-      WriteLn('Opción no válida. Por favor, elige 1 o 2.');
+      writeln('Opcion invalida. Por favor, ingrese 1 o 2.');
     end;
     
-    WriteLn;
-  until opcion = 2;
+  until opcionMenu = 2;
 end.
