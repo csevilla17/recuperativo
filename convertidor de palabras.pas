@@ -30,10 +30,22 @@ begin
   PalabraABinario := binario;
 end;
 
+// Función para convertir una palabra en un número hexadecimal
+function PalabraAHexadecimal(palabra: String): String;
+var
+  i: Integer;
+  resultadoHex: String;
+begin
+  resultadoHex := '';
+  for i := 1 to Length(palabra) do
+    resultadoHex := resultadoHex + IntToHex(Ord(palabra[i]), 2); // Convertir cada carácter a su valor hexadecimal de 2 dígitos
+  PalabraAHexadecimal := resultadoHex;
+end;
+
 var
   opcionMenu, opcionConversion: Integer;
   palabra: String;
-  resultadoBinario: String;
+  resultadoBinario, resultadoHexadecimal: String;
 
 begin
   repeat
@@ -63,8 +75,9 @@ begin
                   writeln('Palabra convertida a binario: ', resultadoBinario);
                 end;
              2: begin
-                  // Lógica para convertir a hexadecimal
-                  writeln('Palabra convertida a hexadecimal: ', palabra);
+                  // Convertir la palabra a hexadecimal
+                  resultadoHexadecimal := PalabraAHexadecimal(palabra);
+                  writeln('Palabra convertida a hexadecimal: ', resultadoHexadecimal);
                 end;
              3: begin
                   // Lógica para convertir a octal
