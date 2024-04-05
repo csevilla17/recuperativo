@@ -3,9 +3,37 @@ program ConvertirPalabra;
 uses
   SysUtils;
 
+// Función para convertir un carácter en su representación binaria de 8 bits
+function CaracterABinario(caracter: Char): String;
+var
+  i, valor: Integer;
+  binario: String;
+begin
+  valor := Ord(caracter); // Obtener el valor ASCII del carácter
+  binario := '';
+  for i := 7 downto 0 do
+  begin
+    binario := binario + Chr((valor shr i) and 1 + Ord('0')); // Convertir el bit a un carácter '0' o '1'
+  end;
+  CaracterABinario := binario;
+end;
+
+// Función para convertir una palabra en una cadena de binarios
+function PalabraABinario(palabra: String): String;
+var
+  i: Integer;
+  binario: String;
+begin
+  binario := '';
+  for i := 1 to Length(palabra) do
+    binario := binario + CaracterABinario(palabra[i]) + ' '; // Convertir cada carácter a su valor binario
+  PalabraABinario := binario;
+end;
+
 var
   opcionMenu, opcionConversion: Integer;
   palabra: String;
+  resultadoBinario: String;
 
 begin
   repeat
@@ -30,8 +58,9 @@ begin
            
            case opcionConversion of
              1: begin
-                  // Lógica para convertir a binario
-                  writeln('Palabra convertida a binario: ', palabra);
+                  // Convertir la palabra a binario
+                  resultadoBinario := PalabraABinario(palabra);
+                  writeln('Palabra convertida a binario: ', resultadoBinario);
                 end;
              2: begin
                   // Lógica para convertir a hexadecimal
