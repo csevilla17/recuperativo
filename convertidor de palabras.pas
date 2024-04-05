@@ -3,17 +3,16 @@ program ConvertirPalabra;
 uses
   SysUtils;
 
-// Función para convertir un carácter en su representación binaria de 8 bits
 function CaracterABinario(caracter: Char): String;
 var
   i, valor: Integer;
   binario: String;
 begin
-  valor := Ord(caracter); // Obtener el valor ASCII del carácter
+  valor := Ord(caracter); // Obtener el valor carácter
   binario := '';
   for i := 7 downto 0 do
   begin
-    binario := binario + Chr((valor shr i) and 1 + Ord('0')); // Convertir el bit a un carácter '0' o '1'
+    binario := binario + Chr((valor shr i) and 1 + Ord('0')); 
   end;
   CaracterABinario := binario;
 end;
