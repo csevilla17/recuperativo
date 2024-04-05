@@ -9,7 +9,7 @@ var
   i, valor: Integer;
   binario: String;
 begin
-  valor := Ord(caracter);
+  valor := Ord(caracter); // Obtener el valor ASCII del carácter
   binario := '';
   for i := 7 downto 0 do
   begin
@@ -26,7 +26,7 @@ var
 begin
   binario := '';
   for i := 1 to Length(palabra) do
-    binario := binario + CaracterABinario(palabra[i]) + ' '; 
+    binario := binario + CaracterABinario(palabra[i]) + ' '; // Convertir cada carácter a su valor binario
   PalabraABinario := binario;
 end;
 
@@ -54,10 +54,33 @@ begin
   PalabraAOctal := resultadoOctal;
 end;
 
+// Función para convertir una palabra en un número romano
+function PalabraARomano(palabra: String): String;
+var
+  i: Integer;
+  resultadoRomano: String;
+begin
+  resultadoRomano := '';
+  for i := 1 to Length(palabra) do begin
+    case UpCase(palabra[i]) of
+      'I': resultadoRomano := resultadoRomano + 'I';
+      'V': resultadoRomano := resultadoRomano + 'V';
+      'X': resultadoRomano := resultadoRomano + 'X';
+      'L': resultadoRomano := resultadoRomano + 'L';
+      'C': resultadoRomano := resultadoRomano + 'C';
+      'D': resultadoRomano := resultadoRomano + 'D';
+      'M': resultadoRomano := resultadoRomano + 'M';
+      else
+        // Carácter no válido, se ignora
+    end;
+  end;
+  PalabraARomano := resultadoRomano;
+end;
+
 var
   opcionMenu, opcionConversion: Integer;
   palabra: String;
-  resultadoBinario, resultadoHexadecimal, resultadoOctal: String;
+  resultadoBinario, resultadoHexadecimal, resultadoOctal, resultadoRomano: String;
 
 begin
   repeat
@@ -94,7 +117,8 @@ begin
                   writeln('Palabra convertida a octal: ', resultadoOctal);
                 end;
              4: begin
-                  writeln('Palabra convertida a romano: ', palabra);
+                  resultadoRomano := PalabraARomano(palabra);
+                  writeln('Palabra convertida a romano: ', resultadoRomano);
                 end;
            else
              writeln('Opcion de conversion invalida.');
